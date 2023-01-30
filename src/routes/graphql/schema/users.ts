@@ -1,4 +1,4 @@
-import { GraphQLObjectType, GraphQLString, GraphQLList } from 'graphql';
+import { GraphQLObjectType, GraphQLString, GraphQLList, GraphQLInputObjectType, GraphQLNonNull } from 'graphql';
 import { FastifyInstance } from 'fastify';
 import { UserEntity } from '../../../utils/DB/entities/DBUsers';
 import { Post } from './posts';
@@ -53,5 +53,24 @@ export const usersQuery = {
     type: new GraphQLList(User),
     resolve: async (_: any, args: any, fastify: FastifyInstance): Promise<UserEntity[]> => {
       return await fastify.db.users.findMany();
+    }
+};
+
+// Mutations
+// Create 
+export const UserInput = new GraphQLInputObjectType({
+    name: 'UserInput',
+    fields: {
+      firstName: { type: new GraphQLNonNull(GraphQLString) },
+      lastName: { type: new GraphQLNonNull(GraphQLString) },
+      email: { type: new GraphQLNonNull(GraphQLString) },
+    },
+  });
+
+export const createUserMutation = {
+    type: User,
+    args: { data: { type: UserInput } },
+    async resolve(parent: any, { data }: Record<'data', Omit<UserEntity, 'id' | 'subscribedToUserIds'>>, fastify: FastifyInstance) {    
+      return await fastify.db.users.create(data);
     }
 };

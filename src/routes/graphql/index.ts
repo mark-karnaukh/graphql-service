@@ -3,10 +3,12 @@ import { graphql, GraphQLSchema, validate, parse, ExecutionResult } from 'graphq
 import { graphqlBodySchema } from './schema';
 import { Query } from './query';
 import * as depthLimit from 'graphql-depth-limit';
+import { Mutation } from './mutation';
 
 
 export const rootSchema = new GraphQLSchema({
-  query: Query
+  query: Query,
+  mutation: Mutation
 });
 
 const plugin: FastifyPluginAsyncJsonSchemaToTs = async (
