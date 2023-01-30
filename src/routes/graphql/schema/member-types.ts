@@ -1,4 +1,4 @@
-import { GraphQLObjectType, GraphQLString, GraphQLInt, GraphQLList } from 'graphql';
+import { GraphQLObjectType, GraphQLInt, GraphQLList, GraphQLString } from 'graphql';
 import { FastifyInstance } from 'fastify';
 import { MemberTypeEntity } from '../../../utils/DB/entities/DBMemberTypes';
 
@@ -12,16 +12,7 @@ const MemberType = new GraphQLObjectType({
 })
 
 // Queries
-
-// query($id: String){
-//     memberType(id: $id) {
-//         id
-//         discount
-//         monthPostsLimit
-//     }
-// }
-
-const memberTypeQuery = {
+export const memberTypeQuery = {
     type: MemberType,
     args: { id: { type: GraphQLString } },
     async resolve(parent: any, args: any, fastify: FastifyInstance): Promise<MemberTypeEntity> {
@@ -29,25 +20,9 @@ const memberTypeQuery = {
     }
 }
 
-// query {
-//     memberTypes {
-//         id
-//         discount
-//         monthPostsLimit
-//     }
-// }
-
 export const memberTypesQuery = {
     type: new GraphQLList(MemberType),
     resolve: async (_: any, args: any, fastify: FastifyInstance): Promise<MemberTypeEntity[]> => {
       return await fastify.db.memberTypes.findMany();
     }
 };
-
-export const Query = new GraphQLObjectType({
-    name: 'Query',
-    fields: {
-        memberType: memberTypeQuery,
-        memberTypes: memberTypesQuery
-    }
-})
