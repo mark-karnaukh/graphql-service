@@ -2,7 +2,7 @@ import { GraphQLObjectType, GraphQLString, GraphQLList, GraphQLInt } from 'graph
 import { FastifyInstance } from 'fastify';
 import { ProfileEntity } from '../../../utils/DB/entities/DBProfiles';
 
-const Profile = new GraphQLObjectType({
+export const Profile = new GraphQLObjectType({
     name: 'Profile',
     fields: () => ({
         id: { type: GraphQLString },

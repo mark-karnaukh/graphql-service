@@ -2,7 +2,7 @@ import { GraphQLObjectType, GraphQLInt, GraphQLList, GraphQLString } from 'graph
 import { FastifyInstance } from 'fastify';
 import { MemberTypeEntity } from '../../../utils/DB/entities/DBMemberTypes';
 
-const MemberType = new GraphQLObjectType({
+export const MemberType = new GraphQLObjectType({
     name: 'MemberType',
     fields: () => ({
         id: {type: GraphQLString },

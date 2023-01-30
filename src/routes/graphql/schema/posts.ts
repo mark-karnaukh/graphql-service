@@ -2,7 +2,7 @@ import { GraphQLObjectType, GraphQLString, GraphQLList } from 'graphql';
 import { FastifyInstance } from 'fastify';
 import { PostEntity } from '../../../utils/DB/entities/DBPosts';
 
-const Post = new GraphQLObjectType({
+export const Post = new GraphQLObjectType({
     name: 'Post',
     fields: () => ({
         id: { type: GraphQLString },
