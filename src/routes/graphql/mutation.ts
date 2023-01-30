@@ -4,7 +4,7 @@ import { GraphQLObjectType } from 'graphql';
 // import { memberTypeQuery, memberTypesQuery } from './schema/member-types';
 
 // Posts
-// import { postQuery, postsQuery } from './schema/posts';
+import { createPostMutation } from './schema/posts';
 
 // Profiles
 // import { profileQuery, profilesQuery } from './schema/profiles';
@@ -15,6 +15,7 @@ import { createUserMutation } from './schema/users';
 export const Mutation = new GraphQLObjectType({
     name: 'Mutation',
     fields: {
-        createUser: createUserMutation
+        createUser: createUserMutation,
+        createPost: createPostMutation,
     }
 })
