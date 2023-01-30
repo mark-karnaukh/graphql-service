@@ -45,7 +45,7 @@ export const createPostMutation = {
       const user = await fastify.db.users.findOne({key: 'id', equals: data.userId });
 
       if (!user) {
-        throw new Error(`User ${data.userId} doesn't exist!`)
+        return fastify.httpErrors.badRequest(`User ${data.userId} doesn't exist!`);
       }
   
       return await fastify.db.posts.create(data);
