@@ -5,7 +5,7 @@
 Clone from the repository
 
 ```bash
-git clone https://github.com/mark-karnaukh/graphql-service
+git clone https://github.com/mark-karnaukh/graphql-service.git
 ```
 
 Checkout to develop branch
